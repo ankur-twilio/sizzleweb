@@ -205,11 +205,15 @@ body {
 }
 
 
-
-.videoReactions{
+.reactions-buttons-container {
   position: absolute;
-  bottom: 0;
+  text-align: center;
+  bottom: 30px;
+  width: 100%;
   z-index: 999999;
+}
+.videoReactions {
+  margin: 0 auto;
 }
 
 .videoReactions > ul {
@@ -237,12 +241,12 @@ body {
 }
 
 .videoReactions > ul > li:nth-child(1){
-  padding: 10px 8px 10px 24px;
+  padding: 14px 14px 14px 40px;
   border-right: 1px solid #fafafa;
 }
 
 .videoReactions > ul > li:nth-child(2){
-  padding: 10px 24px 10px 8px;
+  padding: 14px 40px 14px 14px;
 }
 
 .videoReactions > ul > li:hover{
