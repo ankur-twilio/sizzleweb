@@ -142,17 +142,24 @@
 
 
 const loginElm = $('#login');
+const videoContainerElm = $('#video-container');
+const launchButtonElm = $('#launch_button');
 const { Player } = Twilio.Live;
 const {
   host,
   protocol,
 } = window.location;
 
-loginElm.hide();
+loginElm.show();
+videoContainerElm.hide();
+
+launchButtonElm.on('click', function() {
+	launchVideo();
+});
 
 console.log(Player.setLogLevel = 'debug');
 
-function getPlayerGrant(callback) {
+async function getPlayerGrant(callback) {
 $.getJSON('https://twilio-live-interactive-video-0584-1789-dev.twil.io/join-stream-as-viewer?user_identity=ankur&stream_name=ankit')
   .then(function(data) {
   	console.log(data);
@@ -160,8 +167,17 @@ $.getJSON('https://twilio-live-interactive-video-0584-1789-dev.twil.io/join-stre
   });
 }
 
-getPlayerGrant(async function(token) {    
-	// Join a live stream.
+async function launchVideo() {
+	launchButtonElm.attr('disabled', true);
+	launchButtonElm.text('Preparing sizzle...');
+
+	getPlayerGrant(createPlayer);
+	await sleep(2000);
+	loginElm.hide();
+	videoContainerElm.show();
+}
+
+async function createPlayer(token) {// Join a live stream.
 	const player = await Player.connect(token, {
 	  playerWasmAssetsPath: `${protocol}//${host}/video_stuff`,
 	});
@@ -185,10 +201,11 @@ getPlayerGrant(async function(token) {
 	  console.log(player.TimedMetadata)
 	  console.log('time');
 	});
+}
 
-});
-
-
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 feather.replace({'stroke-width': 1.5 });
 
