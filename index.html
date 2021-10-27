@@ -5,11 +5,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta property="og:title" content="Twilio SIZZLE" />
+    <meta property="og:title" content="sizzleweb." />
     <meta property="og:type" content="website" />
     <meta property="og:image" itemprop="image" content="/og.png" />
 
-    <title>Twilio Magic Demo</title>
+    <title>sizzleweb.</title>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@400;900&family=Playfair+Display&display=swap" rel="stylesheet">
@@ -27,12 +27,11 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.1.0/anime.min.js" crossorigin="anonymous"></script>
       <script src="https://media.twiliocdn.com/sdk/js/video/releases/2.7.2/twilio-video.min.js"></script>
       <script src="video_stuff/twilio-live-player.min.js"></script>
+      <script src="https://media.twiliocdn.com/sdk/js/sync/releases/2.0.1/twilio-sync.min.js"></script>
+
 </head>
 <body ontouchstart="">
-	
-
-<!-- <header class="header">welcome to sizzleweb.</header> -->
-<div class="videos-container">
+	<div class="videos-container">
 	<div class="remote-container">
 		<div class="video-container">
 			<header class="header">sizzleweb</header>
@@ -44,12 +43,11 @@
         <div class="reactions-buttons-container">
           <div class="videoReactions">
             <ul>
-              <li><i data-feather="thumbs-up" id="up"></i></li>
-              <li><i data-feather="thumbs-down" id="down"></i></li>
+              <li data-item="init" id="up"><i data-feather="thumbs-up"></i></li>
+              <li data-item="init" id="down"><i data-feather="thumbs-down"></i></li>
             </ul>
           </div>          
         </div>
-
         <div id="reactions">
         </div>
 			</div>

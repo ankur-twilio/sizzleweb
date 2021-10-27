@@ -1,205 +1,120 @@
-// const Video = Twilio.Video;
-// const toggleableVideo = false;
-// const videoDevices = [];
-// const queryString = window.location.search;
-// const urlParams = new URLSearchParams(queryString);
-// const roomName = urlParams.get('room') ?? 'default-room';
-// let room;
-
-// const registerMuteButton = function(room) {
-// 	$('.mic-holder').show();
-// 	console.log('resgitering mute button');
-// 	$('.mic-holder').on('click', function() {
-// 		room.localParticipant.audioTracks.forEach(publication => {
-// 			if(publication.track.isEnabled) {
-// 				publication.track.disable();
-// 				$('.unmuted').hide();
-// 				$('.muted').show();
-// 			}
-// 			else {
-// 				publication.track.enable();
-// 				$('.unmuted').show();
-// 				$('.muted').hide();
-// 			}
-// 		});
-// 	});
-// }
-
-// const registerRemoteTracks = function(participant) {
-// 	console.log('registering remote tracks');
-// 	participant.tracks.forEach(publication => {
-// 		if (publication.isSubscribed) {
-// 			const track = publication.track;
-// 			track.attach('#remote');
-// 		}
-// 	});
-
-// 	participant.on('trackSubscribed', track => {
-// 		track.attach('#remote');
-// 	});
-// }
-
-// const deregisterRemoteTracks = function(participant) {
-// 	participant.tracks.forEach(publication => {
-// 		if (publication.isSubscribed) {
-// 			const track = publication.track;
-// 			track.detach();
-// 		}
-// 	});
-// }
-
-// const registerRemoteEvents = function(room) {
-// 	// Log any Participants already connected to the Room
-// 	room.participants.forEach(participant => {
-// 	  console.log(`Participant "${participant.identity}" is connected to the Room`);
-// 	  registerRemoteTracks(participant);
-// 	});
-
-// 	room.on('participantConnected', participant => {
-// 	  console.log(`Participant connected: ${participant.identity}`);
-// 	  registerRemoteTracks(participant);
-// 	});
-
-// 	room.on('participantDisconnected', participant => {
-// 	  console.log(`Participant disconnected: ${participant.identity}`);
-// 	  deregisterRemoteTracks(participant);
-// 	});
-// }
-
-// const switchCameras = function(track) {
-// 	console.log('resgitering switcher');
-// 	$('.switch-camera').on('click', function() {
-// 		let current = track.mediaStreamTrack.getSettings().facingMode;
-// 		if (current === 'user') {
-// 			track.restart({ facingMode: 'environment' });
-// 			console.log(track);
-// 		}
-// 		else {
-// 			track.restart({ facingMode: 'user' });
-// 			console.log(track);
-// 		}
-// 	});
-// }
-
-// const getToken = function(callback) {
-// 	return $.getJSON('https://proxy-demo-7914.twil.io/video_token')
-// 	.then((data) => callback(data));
-// }
-
-// const connect = function(tracks) {
-// 	return getToken(function(token) {
-// 		return Video.connect(token, {
-// 			name: roomName,
-// 			tracks: tracks
-// 		});
-// 	});
-// }
-
-
-// Video.createLocalTracks({ 
-// 		name: 'testing',
-// 		audio: true,
-// 		video: {
-// 			height: 480, 
-// 			frameRate: 24, 
-// 			width: 640,
-// 			facingMode: 'user'
-// 		}
-// 	}).then(localTracks => {
-// 	 	localTracks.forEach(function(track) {
-// 	 		if (track.kind === 'video') {
-
-// 	 			console.log(track);
-	 			
-// 	 			track.attach('#local');
-// 	 			track.restart({ facingMode: 'user' });
-
-// 	 			console.log(track);
-
-//             	$( ".preview-container" ).draggable({
-//             		containment : ".videos-container"
-//             	});
-
-//             	let switchable = track.mediaStreamTrack.getSettings().facingMode;
-//             	if (switchable) {
-//             		$('.switch-camera').show(0, switchCameras(track));
-//             	}
-// 	 		}
-// 	 	})
-// 	 	return connect(localTracks);
-// 	}).then(room => {
-// 		console.log('Room connected!');
-// 		registerMuteButton(room);
-// 		registerRemoteEvents(room);
-// 	});
-
-
-
-
-
-
-
-
-
 const loginElm = $('#login');
 const videoContainerElm = $('#video-container');
 const launchButtonElm = $('#launch_button');
+const upvoteElm = $('#up');
+const downvoteElm = $('#down');
+
 const { Player } = Twilio.Live;
+const urlParams = new URLSearchParams(window.location.search);
 const {
   host,
   protocol,
 } = window.location;
 
+!function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"];analytics.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};for(var e=0;e<analytics.methods.length;e++){var key=analytics.methods[e];analytics[key]=analytics.factory(key)}analytics.load=function(key,e){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.src="https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);analytics._loadOptions=e};analytics._writeKey="vHg3IX68uF3Ftnh1evMzEuj5I7zufV24";;analytics.SNIPPET_VERSION="4.15.3";
+
+    analytics.load("vHg3IX68uF3Ftnh1evMzEuj5I7zufV24");
+    analytics.page();
+   
+}}();
+
+let identifyingPhoneNumber = urlParams.get('phone');
+analytics.identify(identifyingPhoneNumber);
+
 loginElm.show();
 videoContainerElm.hide();
 
-launchButtonElm.on('click', function() {
-	launchVideo();
+launchButtonElm.attr('disabled', true);
+launchButtonElm.text('Preparing sizzle...');
+
+createPlayer().then(function () {
+	launchButtonElm.attr('disabled', false);
+	launchButtonElm.text('Launch');
+	launchButtonElm.on('click', function() {
+		window.player.isMuted = false;
+		launchVideo();
+	});
 });
 
-console.log(Player.setLogLevel = 'debug');
+getASyncToken().then(function(token) {
+	startListeningForItemChanges(token);
+});
 
-async function getPlayerGrant(callback) {
-$.getJSON('https://twilio-live-interactive-video-0584-1789-dev.twil.io/join-stream-as-viewer?user_identity=ankur&stream_name=ankit')
-  .then(function(data) {
-  	console.log(data);
-    callback(data.token);
-  });
+async function getASyncToken() {
+	const data = await $.getJSON('https://segment-test-3208.twil.io/synctokener');
+	let token = data.token;
+	return token;
 }
+
+function startListeningForItemChanges(token) {
+    let syncClient = new Twilio.Sync.Client(token);
+
+    syncClient.on('tokenAboutToExpire', function() {
+      var token = getSyncToken(function(token) {
+        syncClient.updateToken(token);
+      });
+    });
+
+    syncClient.document('current_item').then(function(document) {
+      document.on('updated', function(event) {
+      	console.log(event.data.item);
+        let newitem = event.data.item;
+        updateButtons(newitem);
+      });
+    });
+}
+
+function updateButtons(item) {
+
+	upvoteElm.attr('data-item', item);
+	downvoteElm.attr('data-item', item);
+}
+
 
 async function launchVideo() {
 	launchButtonElm.attr('disabled', true);
-	launchButtonElm.text('Preparing sizzle...');
+	launchButtonElm.text('Launching sizzle...');
 
-	getPlayerGrant(createPlayer);
-	await sleep(2000);
+	console.log(window.player);
+	
+	window.player.on(Player.Event.TimedMetadataReceived, () => {
+	  console.log(player.TimedMetadata)
+	  console.log('time');
+	});
+
+	window.player.on(Player.Event.VolumeChanged, () => {
+	  if (player.isMuted) {
+	    console.log('is_muted');
+	  } else {
+	    console.log('is_not_muted');
+	  }
+	});
+
 	loginElm.hide();
 	videoContainerElm.show();
 }
 
-async function createPlayer(token) {// Join a live stream.
+async function createPlayer() {
+	const data = await $.getJSON('https://twilio-live-interactive-video-0584-1789-dev.twil.io/join-stream-as-viewer?user_identity=ankur&stream_name=' + urlParams.get('stream'));
+	const token = data.token;
+	const videoElement = document.querySelector('#remote');
+	videoElement.playsInline = true;
+
 	const player = await Player.connect(token, {
 	  playerWasmAssetsPath: `${protocol}//${host}/video_stuff`,
 	});
 
-	// player.setLogLevel('debug');
 
-	const videoElement = document.querySelector('#remote');
-	// This is required for inline playback on iOS.
-	videoElement.playsInline = true;
-
-	player.on(Player.Event.StateChanged, () => {
-	  	if (player.state == 'ready') {
-	  		console.log('player_ready');
-	  		player.play();
-	  		player.isMuted = false;
-	  		player.attach(videoElement);
-	  	}
-	  });
-
-	player.on(Player.Event.TimedMetadataReceived, () => {
-	  console.log(player.TimedMetadata)
-	  console.log('time');
+	return new Promise((resolve, reject) => {
+		player.on(Player.Event.StateChanged, () => {
+		  	if (player.state == 'ready') {
+		  		console.log('player_ready');
+		  		player.play();
+		  		player.attach(videoElement);
+		  		window.player = player;
+		  		resolve(player);
+		  	}
+		  });
 	});
 }
 
@@ -216,23 +131,35 @@ document.getElementById("down").addEventListener("click", downClicked);
 
 
 //Functions
-function upClicked(){
-  var upicon = document.createElement("i");
-  upicon.setAttribute("data-feather", "thumbs-up");
-  upicon.setAttribute("class", "reaction up");
-  document.getElementById("reactions").appendChild(upicon);
-  feather.replace();
-  animateThatShit();
+function upClicked(e){
+  let itemStatus = upvoteElm.attr('data-item');
+	let segmentEvent = 'up-' + itemStatus;
+	var upicon = document.createElement("i");
+	upicon.setAttribute("data-feather", "thumbs-up");
+	upicon.setAttribute("class", "reaction up");
+	document.getElementById("reactions").appendChild(upicon);
+	feather.replace();
+	animateThatShit();
+  analytics.track(segmentEvent, {
+    segmentEvent: 1,
+    eventName: segmentEvent
+  });
 }
 
 
-function downClicked(){
-  var upicon = document.createElement("i");
-  upicon.setAttribute("data-feather", "thumbs-down");
-  upicon.setAttribute("class", "reaction down");
-  document.getElementById("reactions").appendChild(upicon);
-  feather.replace();
-  animateThatShit();
+function downClicked(e){
+  let itemStatus = downvoteElm.attr('data-item');
+  let segmentEvent = 'down-' + itemStatus;
+	var upicon = document.createElement("i");
+	upicon.setAttribute("data-feather", "thumbs-down");
+	upicon.setAttribute("class", "reaction down");
+	document.getElementById("reactions").appendChild(upicon);
+	feather.replace();
+	animateThatShit();
+  analytics.track(segmentEvent, {
+    segmentEvent: 1,
+    eventName: segmentEvent
+  });
 }
 
 
@@ -253,6 +180,6 @@ function animateThatShit(shit){
       duration: function() { return anime.random(3000,5500); }
     },
     duration: function() { return anime.random(3000,7000); },
-    easing: 'easeInQuad'
+    easing: 'easeOutCubic'
   });
 }

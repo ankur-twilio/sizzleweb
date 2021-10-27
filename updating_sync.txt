@@ -1,0 +1,23 @@
+curl -X POST https://sync.twilio.com/v1/Services/IS79aa902e973bf0bb625b8c4cf77737c2/Documents/current_item \
+--data-urlencode "Data={"item":"cake"}" \
+-u $SIZZLE_ACCOUNT_SID:$SIZZLE_AUTH_TOKEN
+
+
+curl -X POST https://sync.twilio.com/v1/Services/IS79aa902e973bf0bb625b8c4cf77737c2/Documents/current_item \
+--data-urlencode "Data={"item":"pie"}" \
+-u $SIZZLE_ACCOUNT_SID:$SIZZLE_AUTH_TOKEN
+
+
+curl -X POST https://sync.twilio.com/v1/Services/IS79aa902e973bf0bb625b8c4cf77737c2/Documents/current_item \
+--data-urlencode "Data={"item":"rock"}" \
+-u $SIZZLE_ACCOUNT_SID:$SIZZLE_AUTH_TOKEN
+
+
+curl -X POST https://sync.twilio.com/v1/Services/IS79aa902e973bf0bb625b8c4cf77737c2/Documents/current_item \
+--data-urlencode "Data={"item":"edm"}" \
+-u $SIZZLE_ACCOUNT_SID:$SIZZLE_AUTH_TOKEN
+
+
+curl -X POST https://sync.twilio.com/v1/Services/IS79aa902e973bf0bb625b8c4cf77737c2/Documents/current_item \
+--data-urlencode "Data={"item":"rap"}" \
+-u $SIZZLE_ACCOUNT_SID:$SIZZLE_AUTH_TOKEN
