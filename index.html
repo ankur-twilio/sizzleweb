@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta Information -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:title" content="Twilio SIZZLE" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" itemprop="image" content="/og.png" />
+
+    <title>Twilio Magic Demo</title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@400;900&family=Playfair+Display&display=swap" rel="stylesheet">
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
+    
+    <link href="index.css" rel="stylesheet">
+
+    <script
+      src="https://code.jquery.com/jquery-2.2.4.min.js"
+      integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+      crossorigin="anonymous"></script>
+      <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js" integrity="sha512-0bEtK0USNd96MnO4XhH8jhv3nyRF0eK87pJke6pkYf3cM0uDIhNJy9ltuzqgypoIFXw3JSuiy04tVk4AjpZdZw==" crossorigin="anonymous"></script>
+      <script src="https://unpkg.com/feather-icons" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.1.0/anime.min.js" crossorigin="anonymous"></script>
+      <script src="https://media.twiliocdn.com/sdk/js/video/releases/2.7.2/twilio-video.min.js"></script>
+      <script src="video_stuff/twilio-live-player.min.js"></script>
+</head>
+<body ontouchstart="">
+	
+
+<!-- <header class="header">welcome to sizzleweb.</header> -->
+<div class="videos-container">
+	<div class="remote-container">
+
+
+		<div class="video-container">
+			<header class="header">sizzleweb</header>
+			<div id="login" class="entry">
+				<form id="number">
+					<label for="otp">
+						enter your passcode.
+						<input type="text" name="otp">
+					</label>
+					<button type="submit">launch sizzleweb.</button>
+				</form>
+			</div>
+			<div class="video">
+				<video id="remote" class="full"></video>
+			</div>
+			<div class="shadow"></div>
+
+			<div class="videoReactions">
+				<ul>
+					<li><i data-feather="thumbs-up" id="up"></i></li>
+					<li><i data-feather="thumbs-down" id="down"></i></li>
+				</ul>
+			</div>
+
+			<div id="reactions">
+			</div>
+
+		</div>
+
+
+		<!-- <div class="preview-container">
+			<video id="local" class="preview"></video>
+		</div> -->
+	</div>
+	<div class="mic-holder">
+		<svg class="unmuted" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 0c-49.456 0-89.693 40.237-89.693 89.693v176.279c0 49.45 40.237 89.687 89.693 89.687 49.456 0 89.693-39.957 89.693-89.071V89.693C345.693 40.237 305.456 0 256 0zm52.315 266.583c0 28.503-23.47 51.698-52.315 51.698s-52.321-23.464-52.321-52.315V89.693c0-28.851 23.47-52.321 52.321-52.321s52.321 23.47 52.315 52.321v176.89zM237.314 409.226h37.372v84.088h-37.372z"/><path d="M305.207 474.628h-98.414c-10.321 0-18.686 8.365-18.686 18.686S196.472 512 206.793 512h98.414c10.321 0 18.686-8.365 18.686-18.686s-8.365-18.686-18.686-18.686zM397.392 234.822c-10.321 0-18.686 8.365-18.686 18.686v14.949c0 67.656-55.049 122.706-122.706 122.706-67.662 0-122.706-55.049-122.706-122.706v-14.949c0-10.321-8.365-18.686-18.686-18.686s-18.686 8.365-18.686 18.686v14.949c0 88.267 71.811 160.078 160.078 160.078s160.078-71.811 160.078-160.078v-14.949c0-10.32-8.365-18.686-18.686-18.686z"/></svg>
+		<svg class="muted" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 0c-55.124 0-99.973 44.849-99.973 99.973v169.896c0 55.124 44.849 99.973 99.973 99.973s99.973-45.109 99.973-100.551V99.973C355.973 44.849 311.13 0 256 0zm65.3 269.291c0 36.325-29.293 65.878-65.3 65.878s-65.3-29.298-65.3-65.3V99.973c0-36.008 29.293-65.3 65.3-65.3s65.3 29.293 65.3 65.3v169.318zM238.664 420.117h34.673v78.591h-34.673z"/><path d="M327.657 477.327H184.343c-9.575 0-17.336 7.761-17.336 17.336s7.761 17.336 17.336 17.336h143.314c9.575 0 17.336-7.761 17.336-17.336s-7.761-17.336-17.336-17.336zM402.203 184.343c-9.575 0-17.336 7.761-17.336 17.336v68.19c0 71.056-57.805 128.867-128.867 128.867s-128.867-57.811-128.867-128.867v-68.19c0-9.576-7.761-17.336-17.336-17.336s-17.336 7.761-17.336 17.336v68.19c0 90.178 73.362 163.539 163.539 163.539s163.539-73.362 163.539-163.539v-68.19c0-9.575-7.76-17.336-17.336-17.336z"/><path d="M467.047 44.953c-6.773-6.773-17.741-6.773-24.514 0l-397.58 397.58c-6.773 6.767-6.773 17.747 0 24.514a17.268 17.268 0 0012.257 5.08c4.432 0 8.876-1.693 12.257-5.08l397.58-397.58c6.773-6.767 6.773-17.747 0-24.514z"/></svg>
+	</div>
+	<div class="switch-camera">
+		<svg viewBox="0 -25 512 512" xmlns="http://www.w3.org/2000/svg">
+			<path d="m351 253h-51c-11.046875 0-20-8.953125-20-20s8.953125-20 20-20h23.351562c-15.082031-25.140625-42.308593-41-72.8125-41-31.21875 0-59.871093 17.066406-74.773437 44.539062-5.269531 9.707032-17.410156 13.308594-27.117187 8.039063-9.710938-5.265625-13.308594-17.40625-8.042969-27.113281 21.90625-40.378906 64.03125-65.464844 109.929687-65.464844 27.335938 0 53.304688 8.664062 75.09375 25.0625 9.664063 7.269531 18.203125 15.964844 25.371094 25.65625v-19.71875c0-11.046875 8.953125-20 20-20s20 8.953125 20 20v50c0 22.054688-17.945312 40-40 40zm141 49c11.046875 0 20-8.953125 20-20v-130c0-44.113281-35.886719-80-80-80h-30.359375c-8.566406 0-16.175781-5.449219-18.9375-13.554688l-6.050781-17.78125c-8.277344-24.320312-31.101563-40.664062-56.796875-40.664062h-127.769531c-25.199219 0-47.878907 15.921875-56.433594 39.621094l-6.925782 19.171875c-2.851562 7.898437-10.410156 13.207031-18.8125 13.207031h-29.914062c-44.113281 0-80 35.886719-80 80v230c0 44.113281 35.886719 80 80 80h352c44.113281 0 80-35.886719 80-80 0-11.046875-8.953125-20-20-20s-20 8.953125-20 20c0 22.054688-17.945312 40-40 40h-352c-22.054688 0-40-17.945312-40-40v-230c0-22.054688 17.945312-40 40-40h29.914062c25.199219 0 47.878907-15.921875 56.433594-39.621094l6.925782-19.171875c2.851562-7.898437 10.410156-13.207031 18.8125-13.207031h127.769531c8.5625 0 16.171875 5.445312 18.933593 13.554688l6.050782 17.78125c8.28125 24.320312 31.105468 40.664062 56.800781 40.664062h30.359375c22.054688 0 40 17.945312 40 40v130c0 11.046875 8.953125 20 20 20zm-263-17c0-11.046875-8.953125-20-20-20h-51c-22.054688 0-40 17.945312-40 40v50c0 11.046875 8.953125 20 20 20s20-8.953125 20-20v-19.96875c7.207031 9.792969 15.808594 18.574219 25.554688 25.90625 21.792968 16.398438 47.757812 25.0625 75.089843 25.0625 45.902344 0 88.027344-25.085938 109.933594-65.460938 5.269531-9.710937 1.667969-21.851562-8.042969-27.117187-9.707031-5.269531-21.847656-1.667969-27.113281 8.042969-14.90625 27.46875-43.558594 44.535156-74.777344 44.535156-30.503906 0-57.730469-15.859375-72.8125-41h23.167969c11.046875 0 20-8.953125 20-20zm0 0"/>
+		</svg>
+	</div>
+</div>
+
+<script src="video.js"></script>
+
+</body>
+</html>

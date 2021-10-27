@@ -1,0 +1,294 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+li {
+  list-style: none;
+}
+
+body {
+  font-family: "Catamaran", sans-serif;
+  background: rgba(0, 0, 0, 0.97);
+  height: 100%;
+  background: #0E1229;
+}
+
+.header {
+  color: #fff;
+  width: 100%;
+  line-height: 20px;
+  font-size: 14px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 99999;
+  text-align: right;
+  letter-spacing: 2px;
+}
+
+.videos-container {
+  width: 100%;
+  height: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  background: #0E1229;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.videos-container .preview-container {
+  z-index: 999;
+  position: absolute;
+  width: 150px;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+  bottom: 50px;
+  right: 0;
+  cursor: -webkit-grab;
+  cursor: grab;
+}
+
+.videos-container .preview-container:focus,
+.videos-container .preview-container:active {
+  cursor: -webkit-grabbing;
+  cursor: grabbing;
+}
+
+.videos-container .preview-container video {
+  height: 100%;
+  position: relative;
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+
+.videos-container .remote-container {
+  width: 90%;
+  max-width: 500px;
+  border-radius: 8px;
+}
+
+.shadow {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  box-shadow: inset 0px 0px 80px 36px rgba(0,0,0,0.75);
+  top: 0;
+  left: 0;
+  z-index: 9999;
+}
+
+.videos-container .remote-container .video-container {
+  width: 100%;
+  padding-top: 133%;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.videos-container .remote-container .video-container video {
+  border-radius: 8px;
+  position: absolute;
+  top: 0;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  height: 100%;
+}
+
+.videos-container .switch-camera,
+.videos-container .mic-holder {
+  position: absolute;
+  left: 20px;
+  background: #1b234f;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+  padding: 15px;
+  height: 20px;
+  border-radius: 100%;
+  
+}
+
+.videos-container .switch-camera svg,
+.videos-container .mic-holder svg {
+  top: 0;
+  fill: #fff;
+  width: 20px;
+}
+
+.videos-container .switch-camera:hover,
+.videos-container .mic-holder:hover {
+  cursor: pointer;
+}
+
+.videos-container .switch-camera:active,
+.videos-container .switch-camera:focus,
+.videos-container .mic-holder:active,
+.videos-container .mic-holder:focus {
+  background: #0E1229;
+  box-shadow: 5px 5px 1px rgba(0, 0, 0, 0.6);
+}
+
+.videos-container .switch-camera:active svg,
+.videos-container .switch-camera:focus svg,
+.videos-container .mic-holder:active svg,
+.videos-container .mic-holder:focus svg {
+  fill: #DFE1F0;
+}
+
+.videos-container .switch-camera {
+  bottom: 100px;
+}
+
+.videos-container .mic-holder {
+  bottom: 50px;
+}
+
+.videos-container .mic-holder svg.unmuted {
+  display: block;
+}
+
+.videos-container .mic-holder svg.muted {
+  display: none;
+}
+
+@media only screen and (max-width: 600px) {
+  .videos-container {
+    height: 100%;
+    width: 100%;
+    margin-top: 0;
+  }
+
+  .videos-container .remote-container {
+    min-width: 100%;
+    height: 100%;
+  }
+
+  .videos-container .remote-container .video-container {
+    padding-top: 0;
+    width: 100%;
+    min-height: 100%;
+    height: auto;
+    border-radius: 0;
+  }
+
+  .videos-container .remote-container .video-container video {
+    min-width: 100%;
+    min-height: 100%;
+    border-radius: 0;
+  }
+
+  .videos-container .preview-container {
+    width: 100px;
+    height: 150px;
+    bottom: 20px;
+    right: 20px;
+  }
+
+  .videos-container .preview-container video {
+    min-width: 100%;
+    min-height: 100%;
+    border-radius: 0;
+  }
+
+  .videos-container .switch-camera {
+    bottom: 80px;
+  }
+
+  .videos-container .mic-holder {
+    bottom: 20px;
+  }
+}
+
+
+
+.videoReactions{
+  position: absolute;
+  bottom: 0;
+  z-index: 999999;
+}
+
+.videoReactions > ul {
+  list-style: none;
+  display: inline-block;
+  border:1px solid #f5f5f5;
+  border-radius: 50px;
+  padding:0px;
+  background: #ffffff;
+  box-shadow:  20px 20px 60px #ccc, 
+             -20px -20px 60px rgba(255,255,255,0.2);
+  
+  -webkit-user-select: none;  /* Chrome all / Safari all */
+  -moz-user-select: none;     /* Firefox all */
+  -ms-user-select: none;      /* IE 10+ */
+  user-select: none;
+  margin: 0 auto;
+}
+
+.videoReactions > ul > li {
+  display: inline-block;
+  color: rgba(0,0,0,0.3);
+  transition: 0.3s;
+  scale:1;
+}
+
+.videoReactions > ul > li:nth-child(1){
+  padding: 10px 8px 10px 24px;
+  border-right: 1px solid #fafafa;
+}
+
+.videoReactions > ul > li:nth-child(2){
+  padding: 10px 24px 10px 8px;
+}
+
+.videoReactions > ul > li:hover{
+  color: rgba(0,0,0,1);
+  transform: scale(1.1);
+  cursor:pointer;
+}
+
+.videoReactions > ul > li > i {
+  font-size: 14px;
+}
+
+#reactions{
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left:  0;
+}
+
+.reaction.up, .reaction.down{
+  display:inline-flex;  
+  position: absolute;
+  top: 390px;
+  width: 16px;
+  height: 16px;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  padding: 8px;
+  border-radius: 20px;
+  overflow:visible; 
+  background-color: #fff;
+}
+
+.reaction.up{
+  stroke: #52c41a;
+  fill: #d9f7be;
+}
+
+.reaction.down{
+  stroke: #f759ab;
+  fill: #ffd6e7;
+}
+
+
